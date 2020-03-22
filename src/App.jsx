@@ -1,8 +1,8 @@
 import React from 'react'
-import { Tree } from './components/index'
+import { Tree } from '@/components/index'
 import 'antd/dist/antd.css'
-import { GlobalStyle, StyledAppWrapper } from './theme/globalStyle'
-import { Header } from './blocks/header/index'
+import { GlobalStyle, StyledAppWrapper } from '@/theme/globalStyle'
+import { Header } from '@/blocks/header/index'
 
 function App() {
   return (

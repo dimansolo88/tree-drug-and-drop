@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import { TreeLine } from './style'
 import { TreeContext } from './tree'
 import { findItem, changeItem } from '../utils/utils'
+import PropTypes from 'prop-types'
 
 const TreeItem = ({ item, dragItem, dragItemNode }) => {
   const { setTree, funcs } = useContext(TreeContext)
@@ -16,18 +17,18 @@ const TreeItem = ({ item, dragItem, dragItemNode }) => {
     // setCurrentLabel(item.label)
   }
 
-  const dragEndHandler = (event) => {
+  const dragEndHandler = event => {
     dragItem.current = null
     dragItemNode.current.removeEventListener('dragend', dragEndHandler)
     dragItemNode.current = null
   }
 
-  const handleDragEnter = (event) => {
+  const handleDragEnter = event => {
     if (dragItemNode.current !== event.target && dragItemNode.current) {
       const elementWillChange = event.target.innerText
       const currentElement = dragItemNode.current.innerText
 
-      setTree((tree) => {
+      setTree(tree => {
         const changed = findItem(tree, elementWillChange)
         const current = findItem(tree, currentElement)
         changeItem(tree, elementWillChange, current.res)
@@ -41,8 +42,8 @@ const TreeItem = ({ item, dragItem, dragItemNode }) => {
     <li>
       <TreeLine
         draggable
-        onDragStart={(e) => dragStartHandler(e, parent)}
-        onDragEnter={(e) => handleDragEnter(e, parent)}
+        onDragStart={e => dragStartHandler(e, parent)}
+        onDragEnter={e => handleDragEnter(e, parent)}
         onClick={() => funcs.toggleOpen(item)}
         onDoubleClick={() => funcs.makeParent(item)}
       >
@@ -53,6 +54,12 @@ const TreeItem = ({ item, dragItem, dragItemNode }) => {
       )}
     </li>
   )
+}
+
+TreeItem.propTypes = {
+  item: PropTypes.object,
+  dragItem: PropTypes.object,
+  dragItemNode: PropTypes.object,
 }
 
 export default TreeItem

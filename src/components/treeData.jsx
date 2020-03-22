@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import TreeItem from './treeItem'
 import AddItem from './addItemInTree'
+import PropTypes from 'prop-types'
 
 const TreeData = ({ tree, item }) => {
   const dragItem = useRef()
@@ -9,13 +10,12 @@ const TreeData = ({ tree, item }) => {
 
   return (
     <ul>
-      {newTreeToArray.map((child) => (
+      {newTreeToArray.map(child => (
         <TreeItem
           key={Object.keys(child)[0]}
           item={child}
           dragItem={dragItem}
-          dragItemNode={dragItemNode}
-        />
+          dragItemNode={dragItemNode} />
       ))}
 
       {newTreeToArray[0]?.root?.label === 'Root' ? null : (
@@ -23,6 +23,20 @@ const TreeData = ({ tree, item }) => {
       )}
     </ul>
   )
+}
+
+TreeData.propTypes = {
+  tree: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.shape({
+      root: PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        children: PropTypes.array.isRequired,
+      }).isRequired,
+    }).isRequired,
+  ]),
+  item: PropTypes.object,
+
 }
 
 export default TreeData
