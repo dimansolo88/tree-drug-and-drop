@@ -1,16 +1,24 @@
-import React, {useMemo, useRef} from "react";
+import React, {useRef} from "react";
 import TreeItem from "./treeItem";
+import AddItem from "./addItemInTree";
 
-const TreeData = ({ tree,  item }) => {
+const TreeData = ({ tree,  item, }) => {
     const dragItem = useRef()
     const dragItemNode = useRef()
-    const newTreeToArray = useMemo(() => tree.hasOwnProperty('root') ? [tree] : tree, [tree])
+    const newTreeToArray =  tree.hasOwnProperty('root')
+        ? [tree] : tree
 
 
     return (
         <ul>
             {newTreeToArray.map(child => <TreeItem
-                key={Object.keys(child)[0]} item={child} dragItem={dragItem} dragItemNode={dragItemNode} />)}
+                key={Object.keys(child)[0]} item={child} dragItem={dragItem} dragItemNode={dragItemNode}
+                 />)}
+
+
+            {newTreeToArray[0]?.root?.label === 'Root' ? null : (
+                <AddItem parent={item} />
+            )}
         </ul>
     );
 }

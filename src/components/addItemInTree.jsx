@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import {TreeLine} from "./style";
+import {TreeContext} from "./tree";
 
 
-const AddItem =({ parent, funcs }) => {
+const AddItem = ({ parent }) => {
+
+    const {funcs} = useContext(TreeContext)
+    console.log(`funcs  ${funcs}`)
     return (
         <li>
             <TreeLine onClick={() => funcs.addChild(parent)}>+</TreeLine>

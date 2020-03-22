@@ -1,12 +1,16 @@
 import React from 'react';
-import './App.css';
-import Tree from "./components/tree";
+import {Tree} from "./components/index";
+import 'antd/dist/antd.css'
+import {GlobalStyle, StyledAppWrapper} from "./theme/globalStyle";
+import {Header} from "./blocks/header/index";
 
 function App() {
   return (
-    <div className="App">
+    <StyledAppWrapper>
+        <Header/>
+        <GlobalStyle/>
         <Tree/>
-    </div>
+    </StyledAppWrapper>
   );
 }
 

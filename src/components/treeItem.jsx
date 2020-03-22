@@ -5,14 +5,17 @@ import {TreeContext} from "./tree";
 import {findItem, changeItem} from "../utils/utils";
 
 const TreeItem = ({ item , dragItem, dragItemNode }) => {
-    const {setTree} = useContext(TreeContext)
 
+    const {setTree, funcs} = useContext(TreeContext)
+    // const [currentLabel, setCurrentLabel] = useState('')
 
     const dragStartHandler = (event, item) => {
 
         dragItemNode.current = event.target
         dragItemNode.current.addEventListener("dragend", dragEndHandler);
         dragItem.current = item;
+        // event.dataTransfer.setData('label',item.label )
+        // setCurrentLabel(item.label)
     };
 
     const dragEndHandler = event => {
@@ -48,6 +51,8 @@ const TreeItem = ({ item , dragItem, dragItemNode }) => {
                 draggable
                 onDragStart={e => dragStartHandler(e, parent)}
                 onDragEnter={e => handleDragEnter(e, parent)}
+                onClick={() => funcs.toggleOpen(item)}
+                onDoubleClick={() => funcs.makeParent(item)}
             >
                 {item[parent].label}
             </TreeLine>
