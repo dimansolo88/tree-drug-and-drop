@@ -1,12 +1,10 @@
-import React from "react";
-import {HeaderStyled, StyledTypography} from "./style";
+import React from 'react'
+import { HeaderStyled, StyledTypography } from './style'
 
 export const Header = () => {
-    return (
-        <HeaderStyled>
-            <StyledTypography>
-                Tree
-            </StyledTypography>
-        </HeaderStyled>
-    )
+  return (
+    <HeaderStyled>
+      <StyledTypography>Tree</StyledTypography>
+    </HeaderStyled>
+  )
 }

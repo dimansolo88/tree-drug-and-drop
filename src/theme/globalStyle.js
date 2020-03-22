@@ -1,7 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
-
-
 export const GlobalStyle = createGlobalStyle`
 html,
 body {
@@ -34,4 +32,3 @@ export const StyledAppWrapper = styled.div`
   height: 100vh;
   flex-direction: column;
 `
-

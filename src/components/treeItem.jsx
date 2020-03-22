@@ -1,66 +1,58 @@
-import TreeData from "./treeData";
-import React, {useContext} from "react";
-import {TreeLine} from "./style";
-import {TreeContext} from "./tree";
-import {findItem, changeItem} from "../utils/utils";
+import TreeData from './treeData'
+import React, { useContext } from 'react'
+import { TreeLine } from './style'
+import { TreeContext } from './tree'
+import { findItem, changeItem } from '../utils/utils'
 
-const TreeItem = ({ item , dragItem, dragItemNode }) => {
+const TreeItem = ({ item, dragItem, dragItemNode }) => {
+  const { setTree, funcs } = useContext(TreeContext)
+  // const [currentLabel, setCurrentLabel] = useState('')
 
-    const {setTree, funcs} = useContext(TreeContext)
-    // const [currentLabel, setCurrentLabel] = useState('')
+  const dragStartHandler = (event, item) => {
+    dragItemNode.current = event.target
+    dragItemNode.current.addEventListener('dragend', dragEndHandler)
+    dragItem.current = item
+    // event.dataTransfer.setData('label',item.label )
+    // setCurrentLabel(item.label)
+  }
 
-    const dragStartHandler = (event, item) => {
+  const dragEndHandler = (event) => {
+    dragItem.current = null
+    dragItemNode.current.removeEventListener('dragend', dragEndHandler)
+    dragItemNode.current = null
+  }
 
-        dragItemNode.current = event.target
-        dragItemNode.current.addEventListener("dragend", dragEndHandler);
-        dragItem.current = item;
-        // event.dataTransfer.setData('label',item.label )
-        // setCurrentLabel(item.label)
-    };
+  const handleDragEnter = (event) => {
+    if (dragItemNode.current !== event.target && dragItemNode.current) {
+      const elementWillChange = event.target.innerText
+      const currentElement = dragItemNode.current.innerText
 
-    const dragEndHandler = event => {
-        dragItem.current = null;
-        dragItemNode.current.removeEventListener('dragend', dragEndHandler)
-        dragItemNode.current = null;
+      setTree((tree) => {
+        const changed = findItem(tree, elementWillChange)
+        const current = findItem(tree, currentElement)
+        changeItem(tree, elementWillChange, current.res)
+        return Object.assign({}, changeItem(tree, currentElement, changed.res))
+      })
     }
+  }
 
-    const handleDragEnter = event => {
-
-        if (dragItemNode.current !== event.target && dragItemNode.current) {
-
-            const elementWillChange = event.target.innerText;
-            const currentElement = dragItemNode.current.innerText;
-
-            setTree(tree => {
-                const changed = findItem(tree, elementWillChange);
-                const current = findItem(tree, currentElement);
-                changeItem(tree, elementWillChange, current.res)
-                return Object.assign({}, changeItem(tree, currentElement, changed.res));
-
-            });
-
-
-        }
-    };
-
-
-    const parent = Object.keys(item)[0];
-    return (
-        <li>
-            <TreeLine
-                draggable
-                onDragStart={e => dragStartHandler(e, parent)}
-                onDragEnter={e => handleDragEnter(e, parent)}
-                onClick={() => funcs.toggleOpen(item)}
-                onDoubleClick={() => funcs.makeParent(item)}
-            >
-                {item[parent].label}
-            </TreeLine>
-            {item[parent].children && (
-                <TreeData item={item[parent]} tree={item[parent].children}  />
-            )}
-        </li>
-    )
+  const parent = Object.keys(item)[0]
+  return (
+    <li>
+      <TreeLine
+        draggable
+        onDragStart={(e) => dragStartHandler(e, parent)}
+        onDragEnter={(e) => handleDragEnter(e, parent)}
+        onClick={() => funcs.toggleOpen(item)}
+        onDoubleClick={() => funcs.makeParent(item)}
+      >
+        {item[parent].label}
+      </TreeLine>
+      {item[parent].children && (
+        <TreeData item={item[parent]} tree={item[parent].children} />
+      )}
+    </li>
+  )
 }
 
 export default TreeItem

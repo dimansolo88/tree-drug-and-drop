@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const TreeLine = styled.button`
   font-family: Menlo, Consolas, monospace;
@@ -11,22 +11,20 @@ export const TreeLine = styled.button`
   outline: inherit;
   cursor: pointer;
   &:hover {
-    background-color: #D6D7D9;
+    background-color: #d6d7d9;
   }
   &:active {
-    background-color: #D6D7D9;
+    background-color: #d6d7d9;
   }
 `
 
 export const StyledContainerApp = styled.div`
-    display: flex;
-    height: 100vh;
-    margin-top: 1rem;
+  display: flex;
+  height: 100vh;
+  margin-top: 1rem;
 `
 
 export const StyledTreeBlock = styled.div`
-    background-color: rgb(244, 245, 247);
-    padding: 3rem;
-
+  background-color: rgb(244, 245, 247);
+  padding: 3rem;
 `
-
