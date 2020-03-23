@@ -23,7 +23,7 @@ const Tree = () => {
 
     parent.children.push({
       [Date.now()]: {
-        label: `New Item${Date.now()}`,
+        label: `${title} ${Date.now()}`,
         children: [],
       },
     })
