@@ -10,12 +10,13 @@ const TreeData = ({ tree, item }) => {
 
   return (
     <ul>
-      {newTreeToArray.map(child => (
-          <TreeItem
+      {newTreeToArray.map((child) => (
+        <TreeItem
           key={Object.keys(child)[0]}
           item={child}
           dragItem={dragItem}
-          dragItemNode={dragItemNode} />
+          dragItemNode={dragItemNode}
+        />
       ))}
 
       {newTreeToArray[0]?.root?.label === 'Root' ? null : (
@@ -36,7 +37,6 @@ TreeData.propTypes = {
     }).isRequired,
   ]),
   item: PropTypes.object,
-
 }
 
 export default TreeData

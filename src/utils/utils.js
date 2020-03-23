@@ -1,8 +1,8 @@
 export const findItem = (obj, searchKey) => {
-  let arr = [obj],
-    res = null,
-    current,
-    property
+  const arr = [obj]
+  let res = null
+  let current
+  let property
 
   while (arr.length > 0) {
     current = arr.shift()
@@ -32,9 +32,9 @@ export const findItem = (obj, searchKey) => {
 }
 
 export const changeItem = (obj, searchKey, replaceObj) => {
-  let arr = [obj],
-    res = null,
-    current
+  const arr = [obj]
+  let res = null
+  let current
 
   while (arr.length > 0) {
     current = arr.shift()

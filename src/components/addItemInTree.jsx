@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import { TreeLine } from './style'
 import { TreeContext } from './tree'
 import PropTypes from 'prop-types'
@@ -17,26 +17,22 @@ const AddItem = ({ parent }) => {
     }
   }
 
-
-  const inputHandler = event => {
-      setValue(event.currentTarget.value)
+  const inputHandler = (event) => {
+    setValue(event.currentTarget.value)
   }
-
-
 
   return (
     <li>
-      {editMOde ?  <input
-              type="text"
-              value={value}
-              onChange={inputHandler}
-              onBlur={toggleOpenCloseEditMOde}
-
-          />
-      : <TreeLine onClick={toggleOpenCloseEditMOde}>+</TreeLine>
-      }
-
-
+      {editMOde ? (
+        <input
+          type="text"
+          value={value}
+          onChange={inputHandler}
+          onBlur={toggleOpenCloseEditMOde}
+        />
+      ) : (
+        <TreeLine onClick={toggleOpenCloseEditMOde}>+</TreeLine>
+      )}
     </li>
   )
 }
