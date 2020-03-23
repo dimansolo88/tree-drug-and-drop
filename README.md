@@ -1,3 +1,7 @@
+БАГ 
+Drug and drop реализован только при перетаскивании элементов снизу вверх
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
