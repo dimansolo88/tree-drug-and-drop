@@ -7,21 +7,18 @@ export const TreeContext = createContext({})
 const Tree = () => {
   const [tree, setTree] = useState(treeData)
 
-  const toggleOpen = (item) => {
+
+
+  const toggleOpenClose = item => {
     item.isOpen = !item.isOpen
-    const newTree = Object.assign({}, tree)
-
+    const newTree = {...tree}
     setTree(newTree)
+
   }
 
-  const makeParent = (item) => {
-    // console.log(item)
-    const newTree = Object.assign({}, tree)
-    item.children = []
-    setTree(newTree)
-  }
 
-  const addChild = (parent) => {
+
+  const addChild = (parent, title) => {
     const newTree = Object.assign({}, tree)
 
     parent.children.push({
@@ -36,8 +33,7 @@ const Tree = () => {
 
   const funcs = {
     setTree,
-    toggleOpen,
-    makeParent,
+    toggleOpenClose,
     addChild,
   }
 

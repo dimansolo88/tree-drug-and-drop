@@ -6,6 +6,9 @@ import { findItem, changeItem } from '../utils/utils'
 import PropTypes from 'prop-types'
 
 const TreeItem = ({ item, dragItem, dragItemNode }) => {
+  const [parent, isOpen] = Object.keys(item)
+
+
   const { setTree, funcs } = useContext(TreeContext)
   // const [currentLabel, setCurrentLabel] = useState('')
 
@@ -37,19 +40,18 @@ const TreeItem = ({ item, dragItem, dragItemNode }) => {
     }
   }
 
-  const parent = Object.keys(item)[0]
   return (
     <li>
       <TreeLine
         draggable
         onDragStart={e => dragStartHandler(e, parent)}
         onDragEnter={e => handleDragEnter(e, parent)}
-        onClick={() => funcs.toggleOpen(item)}
-        onDoubleClick={() => funcs.makeParent(item)}
+        onClick={() => funcs.toggleOpenClose(item)}
+
       >
-        {item[parent].label}
+         {item[parent].label}
       </TreeLine>
-      {item[parent].children && (
+      {item[parent].children && !item[isOpen] && (
         <TreeData item={item[parent]} tree={item[parent].children} />
       )}
     </li>

@@ -11,7 +11,7 @@ const TreeData = ({ tree, item }) => {
   return (
     <ul>
       {newTreeToArray.map(child => (
-        <TreeItem
+          <TreeItem
           key={Object.keys(child)[0]}
           item={child}
           dragItem={dragItem}
